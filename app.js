@@ -1,9 +1,12 @@
 var countOfPlayers = window.prompt("Enter the number of players: ");
 
 //importing modules
+import { dataUpdate } from "./Dependencies/dataUpdate.js";
 import { Jail } from "./Dependencies/jail.js";
 import { Lottery } from "./Dependencies/lottery.js";
 import { Hotel } from "./Dependencies/hotel.js";
+import { countMoves } from "./Dependencies/countMoves.js";
+import { findMax } from "./Dependencies/findMax.js";
 
 
 //variable data
@@ -12,16 +15,6 @@ var bankMoney = 5000;
 var playerMoney = [1000,1000,1000,1000];
 var playerAsset = [0,0,0,0];
 var turn = 1;
-
-//constant data
-var fine = 150;
-var prize = 200;
-var silverValue = 200;
-var goldValue = 300;
-var platinum = 500;
-var silverRent = 50;
-var goldRent = 150;
-var platinumRent = 300;
 
 //player positions
 var player1pos = 1;
@@ -61,10 +54,10 @@ $(".btn").click(function() {
         turn = 1;
     }
 
-    var sum = countMoves(countOfPlayers);
+    var sum = countMoves(countOfPlayers,moves);
     console.log(sum);
     if(sum == 0){
-        var winner = playerMoney.indexOf(findMax()) + 1
+        var winner = playerMoney.indexOf(findMax(playerMoney,countOfPlayers)) + 1
         alert("PLAYER " + winner + " IS THE WINNER!!");
         alert("Refresh the page for a new game")
     }
@@ -88,13 +81,13 @@ $(".btn").click(function() {
                 turn += 1;
 
                 if(jail.includes(player1pos)){
-                    Jail(1,moves,playerMoney,playerAsset,bankMoney);
+                    bankMoney = Jail(1,moves,playerMoney,playerAsset,bankMoney,asset);
                 } else if(lottery.includes(player1pos)){
-                    Lottery(1,moves,playerMoney,playerAsset,bankMoney);
+                    bankMoney = Lottery(1,moves,playerMoney,playerAsset,bankMoney,asset);
                 } else if(hotel.includes(player1pos)){
-                    Hotel(1,hotel.indexOf(player1pos),playerMoney,playerAsset,bankMoney,asset,asset_type);
+                    bankMoney = Hotel(1,hotel.indexOf(player1pos),moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
                 } else {
-                    dataUpdate(1,moves,playerMoney,playerAsset);
+                    bankMoney = dataUpdate(1,moves,playerMoney,playerAsset,bankMoney,asset);
                 }
 
                 break;
@@ -111,13 +104,13 @@ $(".btn").click(function() {
                 turn += 1;
 
                 if(jail.includes(player2pos)){
-                    Jail(2,moves,playerMoney,playerAsset,bankMoney);
+                    bankMoney = Jail(2,moves,playerMoney,playerAsset,bankMoney,asset);
                 } else if(lottery.includes(player2pos)){
-                    Lottery(2,moves,playerMoney,playerAsset,bankMoney);
+                    bankMoney = Lottery(2,moves,playerMoney,playerAsset,bankMoney,asset);
                 } else if(hotel.includes(player2pos)){
-                    Hotel(2,hotel.indexOf(player2pos),playerMoney,playerAsset,bankMoney,asset,asset_type);
+                    bankMoney = Hotel(2,hotel.indexOf(player2pos),moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
                 } else {
-                    dataUpdate(2,moves,playerMoney,playerAsset);
+                    bankMoney = dataUpdate(2,moves,playerMoney,playerAsset,bankMoney,asset);
                 }
 
                 break;
@@ -134,13 +127,13 @@ $(".btn").click(function() {
                 turn += 1;
 
                 if(jail.includes(player3pos)){
-                    Jail(3,moves,playerMoney,playerAsset,bankMoney);
+                    bankMoney = Jail(3,moves,playerMoney,playerAsset,bankMoney,asset);
                 } else if(lottery.includes(player3pos)){
-                    Lottery(3,moves,playerMoney,playerAsset,bankMoney);
+                    bankMoney = Lottery(3,moves,playerMoney,playerAsset,bankMoney,asset);
                 } else if(hotel.includes(player3pos)){
-                    Hotel(3,hotel.indexOf(player3pos),playerMoney,playerAsset,bankMoney,asset,asset_type);
+                    bankMoney = Hotel(3,hotel.indexOf(player3pos),moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
                 } else {
-                    dataUpdate(3,moves,playerMoney,playerAsset);
+                    bankMoney = dataUpdate(3,moves,playerMoney,playerAsset,bankMoney,asset);
                 }
 
                 break;
@@ -151,13 +144,13 @@ $(".btn").click(function() {
                 turn += 1;
 
                 if(jail.includes(player4pos)){
-                    Jail(4,moves,playerMoney,playerAsset,bankMoney);
+                    bankMoney = Jail(4,moves,playerMoney,playerAsset,bankMoney,asset);
                 } else if(lottery.includes(player4pos)){
-                    Lottery(4,moves,playerMoney,playerAsset,bankMoney);
+                    bankMoney = Lottery(4,moves,playerMoney,playerAsset,bankMoney,asset);
                 } else if(hotel.includes(player4pos)){
-                    Hotel(4,hotel.indexOf(player4pos),playerMoney,playerAsset,bankMoney,asset,asset_type);
+                    bankMoney = Hotel(4,hotel.indexOf(player4pos),moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
                 } else {
-                    dataUpdate(4,moves,playerMoney,playerAsset);
+                    bankMoney = dataUpdate(4,moves,playerMoney,playerAsset,bankMoney,asset);
                 }
 
                 break;
@@ -170,25 +163,3 @@ $(".btn").click(function() {
 });
 
 
-
-function countMoves(countOfPlayers) {
-
-    var sum = 0;
-    for(var i=0;i<countOfPlayers;i++){
-        sum += moves[i];
-    }
-
-    return sum;
-}
-
-function findMax() {
-
-    var max = 0;
-    for(var i=0;i<4;i++){
-        if(playerMoney[i] > max){
-            max = playerMoney[i];
-        }
-    }
-
-    return max;
-}

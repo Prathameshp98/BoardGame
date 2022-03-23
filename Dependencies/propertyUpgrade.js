@@ -1,8 +1,9 @@
 import { dataUpdate } from "./dataUpdate.js";
+import { Hotel } from "./hotel.js";
 
 
 
-export function propertyUpgrade(player,index) {
+export function propertyUpgrade(player,index,moves,playerMoney,playerAsset,bankMoney,asset,asset_type) {
 
     if(asset_type[index] != 3){
 
@@ -19,10 +20,12 @@ export function propertyUpgrade(player,index) {
                         alert("Congrats, you have upgraded the hotel to Gold Type with 100 rupees");
                         playerAsset[player-1] += 100;
                         asset_type[index] = 2;
-                        dataUpdate(player);
+                        dataUpdate(player,moves,playerMoney,playerAsset,bankMoney,asset);
     
                     } else {
-                        alert("Insufficient funds, may be another time")
+                        alert("Insufficient funds, may be another time");
+                        moves[player-1] -= 1;
+                        document.getElementById("moves-data-" + player).innerHTML = moves[player-1];
                     }
     
     
@@ -33,15 +36,17 @@ export function propertyUpgrade(player,index) {
                         alert("Congrats, you have upgraded the hotel to Platinum Type with 300 rupees");
                         playerAsset[player-1] += 300;
                         asset_type[index] = 3;
-                        dataUpdate(player);
+                        dataUpdate(player,moves,playerMoney,playerAsset,bankMoney,asset);
     
                     } else {
-                        alert("Insufficient funds, may be another time")
+                        alert("Insufficient funds, may be another time");
+                        moves[player-1] -= 1;
+                        document.getElementById("moves-data-" + player).innerHTML = moves[player-1];
                     }
     
                 } else {
                     alert("Invalid Input");
-                    Hotel(player,index);
+                    propertyUpgrade(player,index,moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
                 }
 
             } else if(asset_type[index] === 2){
@@ -54,31 +59,40 @@ export function propertyUpgrade(player,index) {
                         alert("Congrats, you have upgraded the hotel to Platinum Type with 200 rupees");
                         playerAsset[player-1] += 200;
                         asset_type[index] = 3;
-                        dataUpdate(player);
+                        dataUpdate(player,moves,playerMoney,playerAsset,bankMoney,asset);
     
                     } else {
-                        alert("Insufficient funds, may be another time")
+                        alert("Insufficient funds, may be another time");
+                        moves[player-1] -= 1;
+                        document.getElementById("moves-data-" + player).innerHTML = moves[player-1];
                     }
     
                 } else if(type === "N" || type === "n") {
-                    alert("Please visit again")
+                    alert("Please visit again");
+                    moves[player-1] -= 1;
+                    document.getElementById("moves-data-" + player).innerHTML = moves[player-1];
                 } else {
                     alert("Invalid Input");
-                    Hotel(player,index);
+                    propertyUpgrade(player,index,moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
                 }
 
             }  
 
         } else if(choice === "N" || choice === "n") {
             alert("Please visit again");
+            moves[player-1] -= 1;
+            document.getElementById("moves-data-" + player).innerHTML = moves[player-1];
 
         } else {
             alert("Invalid Input");
-            Hotel(player,index);
+            propertyUpgrade(player,index,moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
         }
     } else {
-        alert("Welcome Back, seems that your hotel is upgraded to its Maximum.")
+        alert("Welcome Back, seems that your hotel is upgraded to its Maximum.");
+        moves[player-1] -= 1;
+        document.getElementById("moves-data-" + player).innerHTML = moves[player-1];
     }
 
+    return bankMoney;
 
 }

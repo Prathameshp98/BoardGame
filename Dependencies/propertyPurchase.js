@@ -1,7 +1,7 @@
 import { dataUpdate } from "./dataUpdate.js";
 
 
-export function propertyPurchase(player,index,playerMoney,playerAsset,bankMoney,asset,asset_type) {
+export function propertyPurchase(player,index,moves,playerMoney,playerAsset,bankMoney,asset,asset_type) {
 
     var choice = window.prompt("Welcome to the hotel, do you wish to purchase? (Press Y for yes and N for no)");
     if(choice === "Y" || choice === "y"){
@@ -15,10 +15,12 @@ export function propertyPurchase(player,index,playerMoney,playerAsset,bankMoney,
                 playerAsset[player-1] += 200;
                 asset[index] = player;
                 asset_type[index] = 1;
-                dataUpdate(player,moves,playerMoney,playerAsset);
+                dataUpdate(player,moves,playerMoney,playerAsset,bankMoney,asset);
 
             } else {
-                alert("Insufficient funds, may be another time")
+                alert("Insufficient funds, may be another time");
+                moves[player-1] -= 1;
+                document.getElementById("moves-data-" + player).innerHTML = moves[player-1];
             }
             
 
@@ -30,10 +32,12 @@ export function propertyPurchase(player,index,playerMoney,playerAsset,bankMoney,
                 playerAsset[player-1] += 300;
                 asset[index] = player;
                 asset_type[index] = 2;
-                dataUpdate(player,moves,playerMoney,playerAsset);
+                dataUpdate(player,moves,playerMoney,playerAsset,bankMoney,asset);
 
             } else {
-                alert("Insufficient funds, may be another time")
+                alert("Insufficient funds, may be another time");
+                moves[player-1] -= 1;
+                document.getElementById("moves-data-" + player).innerHTML = moves[player-1];
             }
 
 
@@ -45,23 +49,29 @@ export function propertyPurchase(player,index,playerMoney,playerAsset,bankMoney,
                 playerAsset[player-1] += 500;
                 asset[index] = player;
                 asset_type[index] = 3;
-                dataUpdate(player,moves,playerMoney,playerAsset);
+                dataUpdate(player,moves,playerMoney,playerAsset,bankMoney,asset);
 
             } else {
-                alert("Insufficient funds, may be another time")
+                alert("Insufficient funds, may be another time");
+                moves[player-1] -= 1;
+                document.getElementById("moves-data-" + player).innerHTML = moves[player-1];
             }
 
         } else {
             alert("Invalid Input");
-            Hotel(player,index);
+            propertyPurchase(player,index,moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
         }
 
     } else if(choice === "N" || choice === "n") {
         alert("Please visit again");
+        moves[player-1] -= 1;
+        document.getElementById("moves-data-" + player).innerHTML = moves[player-1];
 
     } else {
         alert("Invalid Input");
-        Hotel(player,index);
+        propertyPurchase(player,index,moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
     }
+
+    return bankMoney;
 
 }
