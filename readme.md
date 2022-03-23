@@ -9,4 +9,7 @@ BOARD GAME
     Game is created using HTML,CSS and Bootstrap which are used to design the UI.
     The functionality part is taken care by Javascipt DOM and jQuery.
 
+    NOTE: For best experience run the game on laptops and desktops only.
+
     Hope you enjoy the game.
+    
