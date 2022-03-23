@@ -5,7 +5,7 @@ export function propertyPurchase(player,index,moves,playerMoney,playerAsset,bank
 
     var choice = window.prompt("Welcome to the hotel, do you wish to purchase? (Press Y for yes and N for no)");
     if(choice === "Y" || choice === "y"){
-        var type = window.prompt("Great, which type would you like? (Press 1 => Silver, 2 => Gold, 3 => Platinum");
+        var type = window.prompt("Great, which type would you like? (Press 1 => Silver(200), 2 => Gold(300), 3 => Platinum(500)");
         if(type == 1){
 
             if(playerMoney[player-1] >= 200){

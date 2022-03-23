@@ -11,7 +11,7 @@ export function propertyUpgrade(player,index,moves,playerMoney,playerAsset,bankM
         if(choice === "Y" || choice === "y"){
 
             if(asset_type[index] === 1){
-                var type = window.prompt("Great, you own Silver, what will you go for? (2 => Gold, 3 => Platinum");
+                var type = window.prompt("Great, you own Silver, what will you go for? (2 => Gold(100), 3 => Platinum(300)");
 
                 if(type == 2){
                     if(playerMoney[player-1] >= 100){
@@ -50,7 +50,7 @@ export function propertyUpgrade(player,index,moves,playerMoney,playerAsset,bankM
                 }
 
             } else if(asset_type[index] === 2){
-                var type = window.prompt("Great, you own Gold, what to go for Platinum (Press Y for yes and N for no)");
+                var type = window.prompt("Great, you own Gold, what to go for Platinum(200) (Press Y for yes and N for no)");
 
                 if(type === "Y" || type === "y"){
                     if(playerMoney[player-1] >= 200){
