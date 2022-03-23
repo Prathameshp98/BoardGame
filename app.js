@@ -57,9 +57,9 @@ $(".btn").click(function() {
     var sum = countMoves(countOfPlayers,moves);
     console.log(sum);
     if(sum == 0){
-        var winner = playerMoney.indexOf(findMax(playerMoney,countOfPlayers)) + 1
+        var winner = playerMoney.indexOf(findMax(playerMoney,countOfPlayers)) + 1;
         alert("PLAYER " + winner + " IS THE WINNER!!");
-        alert("Refresh the page for a new game")
+        alert("Refresh the page for a new game");
     }
 
     var number = window.prompt("Player "+ turn +", Enter any number from 1 to 12: ");
@@ -150,7 +150,7 @@ $(".btn").click(function() {
                 } else if(hotel.includes(player4pos)){
                     bankMoney = Hotel(4,hotel.indexOf(player4pos),moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
                 } else {
-                    bankMoney = dataUpdate(4,moves,playerMoney,playerAsset,bankMoney,asset);
+                    bankMoney =  dataUpdate(4,moves,playerMoney,playerAsset,bankMoney,asset);
                 }
 
                 break;

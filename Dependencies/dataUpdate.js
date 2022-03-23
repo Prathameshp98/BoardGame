@@ -1,7 +1,7 @@
 
 export function dataUpdate(player,moves,playerMoney,playerAsset,bankMoney,asset){
 
-    var colors = ["yellow","green","red","yellow"];
+    var colors = ["yellow","green","red","blue"];
     var arr = [];
     for(var i=0;i<4;i++){
         if(asset[i] === player){
