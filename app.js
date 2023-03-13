@@ -1,4 +1,10 @@
-var countOfPlayers = window.prompt("Enter the number of players: ");
+// var countOfPlayers = window.prompt("Enter the number of players: ");
+
+$(window).on('load', function() {
+    $('#exampleModal').modal('show');
+});
+
+
 
 //importing modules
 import { dataUpdate } from "./Dependencies/dataUpdate.js";
