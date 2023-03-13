@@ -1,9 +1,5 @@
 /* gameBoard styles */
 
-.board-game {
-    display: none !important;
-}
-
 .center {
     margin: 180px auto;
 }

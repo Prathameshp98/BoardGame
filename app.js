@@ -1,9 +1,70 @@
 // var countOfPlayers = window.prompt("Enter the number of players: ");
 
+const player_name = []
+const player_colours = []
+
 $(window).on('load', function() {
+    $('.board-game').css('display','none')
     $('#exampleModal').modal('show');
 });
 
+
+$('#add').on('mouseup', function() {
+
+    const player_num = $('#player-info')[0].childElementCount + 1
+
+    let colour_options = ``
+
+    const playerCard = `
+        <div id="player_${player_num}" class="card" style="width: 29rem; margin-bottom: 40px;">
+            <div class="card-body d-flex justify-content-between">
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" id="" placeholder="Player ${player_num}" value="Player ${player_num}">
+                </div>
+
+                <div>
+                    <label class="form-label">Colour</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Select your Colour</option>   
+                        ${colour_options}  
+                    </select>
+                </div>
+            </div>
+        </div>
+    `
+    
+    if($('#player-info')[0].childElementCount < 4){
+        $('#player-info').append(playerCard)
+    } else {
+        const toast = new bootstrap.Toast($('#liveToast'))
+        toast.show()
+        $('#alert-msg').html('There can be Maximum 4 players.')
+    }
+})
+
+
+$('#remove').on('mouseup', function() {
+    
+    const player_num = $('#player-info')[0].childElementCount
+    if($('#player-info')[0].childElementCount > 2){
+        $('#player_' + player_num).remove()
+    } else {
+        const toast = new bootstrap.Toast($('#liveToast'))
+        toast.show()
+        $('#alert-msg').html('There should be Minimum 2 players.')
+    }
+})
+
+$('#start_game').mouseup('mouseup', function() {
+
+    console.log($('#player-info'))
+    const player_num = $('#player-info')[0].childElementCount
+    
+
+    // $('#exampleModalToggle2').modal('hide');
+    // $('.board-game').css('display','flex')
+})
 
 
 //importing modules
