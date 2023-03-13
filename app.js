@@ -1,6 +1,6 @@
-// var countOfPlayers = window.prompt("Enter the number of players: ");
 
-const player_name = []
+let countOfPlayers = 0
+const player_name = ["","","",""]
 const all_colours = ["Red", "Yellow", "Blue", "Green"]
 const player_colours = ["","","",""]
 
@@ -84,7 +84,7 @@ $('#start_game').mouseup('mouseup', function() {
     const player_num = $('#player-info')[0].childElementCount
     for(var i=1; i<=player_num; i++){
         if($('#name_' + i).val().length && $('#colour_' + i).val().length){
-            player_name.push($('#name_' + i).val())
+            player_name[i-1] = ($('#name_' + i).val())
             player_colours[i-1] = ($('#colour_' + i).val())
         } else {
             const toast = new bootstrap.Toast($('#liveToast'))
@@ -96,8 +96,15 @@ $('#start_game').mouseup('mouseup', function() {
     }
 
     if(check){
-        $('#exampleModalToggle2').modal('hide');
+        $('#exampleModalToggle2').modal('hide')
         $('.board-game').css('display','flex')
+
+        $('.p1').html(player_name[0])
+        $('.p2').html(player_name[1])
+        $('.p3').html(player_name[2])
+        $('.p4').html(player_name[3])
+
+        countOfPlayers = player_name.length
     }
 })
 
@@ -136,21 +143,15 @@ var asset_type = [0,0,0,0]; //type of asset owned by certain player, if zero tha
 
 document.getElementById("bank-data").innerHTML = bankMoney;
 
-if(countOfPlayers < 2){
-    alert("Minimum number of players should be 2")
-} else if (countOfPlayers > 4){
-    alert("Maximum number of players should be 4")
-} else {
-
-    for(var i=1; i<=countOfPlayers; i++){
-        document.getElementById("moves-data-" + i).innerHTML = moves[0];
-        document.getElementById("money-data-" + i).innerHTML = playerMoney[0];
-        document.getElementById("asset-data-"+ i).innerHTML = playerAsset[0];
-    }
+for(var i=1; i<=countOfPlayers; i++){
+    document.getElementById("moves-data-" + i).innerHTML = moves[0];
+    document.getElementById("money-data-" + i).innerHTML = playerMoney[0];
+    document.getElementById("asset-data-"+ i).innerHTML = playerAsset[0];
 }
 
+
 // roll dice button clicked
-$(".btn").click(function() {
+$("#roll").click(function() {
 
     if(turn === (parseInt(countOfPlayers) + 1)){
         turn = 1;
