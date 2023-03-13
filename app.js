@@ -1,13 +1,35 @@
 // var countOfPlayers = window.prompt("Enter the number of players: ");
 
 const player_name = []
-const player_colours = []
+const all_colours = ["Red", "Yellow", "Blue", "Green"]
+const player_colours = ["","","",""]
 
 $(window).on('load', function() {
     $('.board-game').css('display','none')
     $('#exampleModal').modal('show');
 });
 
+$('body').on('click', 'select.form-select', function() {
+
+    const player_num = $('#player-info')[0].childElementCount
+    for(var i=1; i<=player_num; i++){
+        if($('#colour_' + i).val().length){  player_colours[i-1] = ($('#colour_' + i).val())  } 
+    }
+
+    console.log(player_colours)
+  
+    if($('#' + this.id)[0].childElementCount < 2){
+        var diff = all_colours.filter(x => player_colours.indexOf(x) === -1)
+        var available = ''
+        diff.forEach(x => {
+            available += '<option>' + x + '</option>'
+        })
+
+        $('#' + this.id).append(`${available}`)
+    }
+
+    
+})
 
 $('#add').on('mouseup', function() {
 
@@ -20,13 +42,13 @@ $('#add').on('mouseup', function() {
             <div class="card-body d-flex justify-content-between">
                 <div class="mb-3">
                     <label class="form-label">Name</label>
-                    <input type="text" class="form-control" id="" placeholder="Player ${player_num}" value="Player ${player_num}">
+                    <input type="text" class="form-control" id="name_${player_num}" placeholder="Player ${player_num}" value="">
                 </div>
 
                 <div>
                     <label class="form-label">Colour</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Select your Colour</option>   
+                    <select class="form-select" aria-label="Default select example" id="colour_${player_num}">
+                        <option selected value="">Select your Colour</option>   
                         ${colour_options}  
                     </select>
                 </div>
@@ -58,12 +80,25 @@ $('#remove').on('mouseup', function() {
 
 $('#start_game').mouseup('mouseup', function() {
 
-    console.log($('#player-info'))
+    var check = true
     const player_num = $('#player-info')[0].childElementCount
-    
+    for(var i=1; i<=player_num; i++){
+        if($('#name_' + i).val().length && $('#colour_' + i).val().length){
+            player_name.push($('#name_' + i).val())
+            player_colours[i-1] = ($('#colour_' + i).val())
+        } else {
+            const toast = new bootstrap.Toast($('#liveToast'))
+            toast.show()
+            $('#alert-msg').html('All the fields are Mandatory.')
+            check = false
+            break
+        } 
+    }
 
-    // $('#exampleModalToggle2').modal('hide');
-    // $('.board-game').css('display','flex')
+    if(check){
+        $('#exampleModalToggle2').modal('hide');
+        $('.board-game').css('display','flex')
+    }
 })
 
 
