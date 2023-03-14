@@ -83,7 +83,7 @@
                                 <div>
                                     <label class="form-label">Colour</label>
                                     <select class="form-select" aria-label="Default select example" id="colour_1">
-                                        <option selected value="">Select your Colour</option>
+                                        <option value="">Select your Colour</option>
                                         
                                     </select>
                                 </div>
@@ -100,7 +100,7 @@
                                 <div>
                                     <label class="form-label">Colour</label>
                                     <select class="form-select" aria-label="Default select example" id="colour_2">
-                                        <option selected value="">Select your Colour</option>
+                                        <option value="">Select your Colour</option>
                                         
                                     </select>
                                 </div>
@@ -122,7 +122,7 @@
 
     <div class="row board-game">
         <div class="col-3">
-            <div class="player-info">
+            <div id="p1" class="player-info">
                 <h1 class="p1">Player 1</h1>
                 <div class="inline-style">
                     <p>Moves Left: &nbsp;</p>
@@ -141,7 +141,7 @@
                     <p id="hotel-data-1">NA</p>
                 </div>
             </div>
-            <div class="player-info">
+            <div id="p3" class="player-info">
                 <h1 class="p3">Player 3</h1>
                 <div class="inline-style">
                     <p>Moves Left: &nbsp;</p>
@@ -281,7 +281,7 @@
         </div>
 
         <div class="col-3">
-            <div class="player-info">
+            <div id="p2" class="player-info">
                 <h1 class="p2">Player 2</h1>
                 <div class="inline-style">
                     <p>Moves Left: &nbsp;</p>
@@ -300,7 +300,7 @@
                     <p id="hotel-data-2">NA</p>
                 </div>
             </div>
-            <div class="player-info">
+            <div id="p4" class="player-info">
                 <h1 class="p4">Player 4</h1>
                 <div class="inline-style">
                     <p>Moves Left: &nbsp;</p>
@@ -321,7 +321,7 @@
             </div>
 
             <div class="button-div">
-                <button type="button" class="btn btn-lg btn-warning" id="roll">Roll Dice</button>
+                <button type="button" class="btn btn-lg btn-warning" id="roll" style="position: fixed; bottom: 30px; right: 30px;">Roll Dice</button>
             </div>
         </div>
     </div> 

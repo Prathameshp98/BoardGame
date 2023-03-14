@@ -9,23 +9,32 @@ $(window).on('load', function() {
     $('#exampleModal').modal('show');
 });
 
+
 $('body').on('click', 'select.form-select', function() {
+
+
+    console.log("player colour: ",player_colours)
+    console.log(this.value, player_colours[this.id.charAt(this.id.length-1) - 1])
+
+    // $('#' + this.id).html(`<option  id="colour-option" selected value="">Select your Colour</option>`)
+    // $('#' + this.id)[0].childElementCount < 2 || this.value.length
+
+    if(this.value === player_colours[this.id.charAt(this.id.length-1) - 1]){
+        $('#' + this.id).html(``)
+        var diff = all_colours.filter(x => player_colours.indexOf(x) === -1)
+        console.log("diffs: ", diff)
+        var available = '<option value="'+ player_colours[this.id.charAt(this.id.length-1) - 1] +'">' + player_colours[this.id.charAt(this.id.length-1) - 1] + '</option>'
+        diff.forEach(x => {
+            available += '<option>' + x + '</option>'
+        })
+        $('#' + this.id).append(`${available}`)
+    } else {
+        console.log("skipped")
+    }
 
     const player_num = $('#player-info')[0].childElementCount
     for(var i=1; i<=player_num; i++){
         if($('#colour_' + i).val().length){  player_colours[i-1] = ($('#colour_' + i).val())  } 
-    }
-
-    console.log(player_colours)
-  
-    if($('#' + this.id)[0].childElementCount < 2){
-        var diff = all_colours.filter(x => player_colours.indexOf(x) === -1)
-        var available = ''
-        diff.forEach(x => {
-            available += '<option>' + x + '</option>'
-        })
-
-        $('#' + this.id).append(`${available}`)
     }
 
     
@@ -70,6 +79,7 @@ $('#remove').on('mouseup', function() {
     
     const player_num = $('#player-info')[0].childElementCount
     if($('#player-info')[0].childElementCount > 2){
+        player_colours[player_num-1] = ""
         $('#player_' + player_num).remove()
     } else {
         const toast = new bootstrap.Toast($('#liveToast'))
@@ -99,14 +109,20 @@ $('#start_game').mouseup('mouseup', function() {
         $('#exampleModalToggle2').modal('hide')
         $('.board-game').css('display','flex')
 
-        $('.p1').html(player_name[0])
-        $('.p2').html(player_name[1])
-        $('.p3').html(player_name[2])
-        $('.p4').html(player_name[3])
+        player_name.forEach((x,index) => {
+            console.log(x, index)
+            if(x.length){
+                $('.p' + (index+1)).html(x)
+                $('.p' + (index+1)).css('color',player_colours[index])
+            } else {
+                $('#p' + (index+1)).css('display','none')
+            }
+        })
 
         countOfPlayers = player_name.length
     }
 })
+
 
 
 //importing modules
