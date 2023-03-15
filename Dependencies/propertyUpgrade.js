@@ -3,7 +3,7 @@ import { Hotel } from "./hotel.js";
 
 
 
-export function propertyUpgrade(player,index,moves,playerMoney,playerAsset,bankMoney,asset,asset_type) {
+export function propertyUpgrade(player,index,moves,playerMoney,bankMoney,asset,asset_type) {
 
     if(asset_type[index] != 3){
 
@@ -18,9 +18,8 @@ export function propertyUpgrade(player,index,moves,playerMoney,playerAsset,bankM
                         playerMoney[player-1] -= 100;
                         bankMoney += 100
                         alert("Congrats, you have upgraded the hotel to Gold Type with 100 rupees");
-                        playerAsset[player-1] += 100;
                         asset_type[index] = 2;
-                        dataUpdate(player,moves,playerMoney,playerAsset,bankMoney,asset);
+                        dataUpdate(player,moves,playerMoney,bankMoney,asset,asset_type);
     
                     } else {
                         alert("Insufficient funds, may be another time");
@@ -34,9 +33,8 @@ export function propertyUpgrade(player,index,moves,playerMoney,playerAsset,bankM
                         playerMoney[player-1] -= 300;
                         bankMoney += 500
                         alert("Congrats, you have upgraded the hotel to Platinum Type with 300 rupees");
-                        playerAsset[player-1] += 300;
                         asset_type[index] = 3;
-                        dataUpdate(player,moves,playerMoney,playerAsset,bankMoney,asset);
+                        dataUpdate(player,moves,playerMoney,bankMoney,asset,asset_type);
     
                     } else {
                         alert("Insufficient funds, may be another time");
@@ -46,7 +44,7 @@ export function propertyUpgrade(player,index,moves,playerMoney,playerAsset,bankM
     
                 } else {
                     alert("Invalid Input");
-                    propertyUpgrade(player,index,moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
+                    propertyUpgrade(player,index,moves,playerMoney,bankMoney,asset,asset_type);
                 }
 
             } else if(asset_type[index] === 2){
@@ -57,9 +55,8 @@ export function propertyUpgrade(player,index,moves,playerMoney,playerAsset,bankM
                         playerMoney[player-1] -= 200;
                         bankMoney += 200
                         alert("Congrats, you have upgraded the hotel to Platinum Type with 200 rupees");
-                        playerAsset[player-1] += 200;
                         asset_type[index] = 3;
-                        dataUpdate(player,moves,playerMoney,playerAsset,bankMoney,asset);
+                        dataUpdate(player,moves,playerMoney,bankMoney,asset,asset_type);
     
                     } else {
                         alert("Insufficient funds, may be another time");
@@ -73,7 +70,7 @@ export function propertyUpgrade(player,index,moves,playerMoney,playerAsset,bankM
                     document.getElementById("moves-data-" + player).innerHTML = moves[player-1];
                 } else {
                     alert("Invalid Input");
-                    propertyUpgrade(player,index,moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
+                    propertyUpgrade(player,index,moves,playerMoney,bankMoney,asset,asset_type);
                 }
 
             }  
@@ -85,7 +82,7 @@ export function propertyUpgrade(player,index,moves,playerMoney,playerAsset,bankM
 
         } else {
             alert("Invalid Input");
-            propertyUpgrade(player,index,moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
+            propertyUpgrade(player,index,moves,playerMoney,bankMoney,asset,asset_type);
         }
     } else {
         alert("Welcome Back, seems that your hotel is upgraded to its Maximum.");

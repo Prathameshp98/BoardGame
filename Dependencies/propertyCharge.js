@@ -1,7 +1,7 @@
 
 import { dataUpdate } from "./dataUpdate.js";
 
-export function propertyCharge (player,index,moves,playerMoney,playerAsset,bankMoney,asset,asset_type) {
+export function propertyCharge (player,index,moves,playerMoney,bankMoney,asset,asset_type) {
     console.log(asset);
     console.log(asset_type);
 
@@ -15,7 +15,7 @@ export function propertyCharge (player,index,moves,playerMoney,playerAsset,bankM
             playerMoney[player-1] -= 50;
             playerMoney[asset[index] - 1] += 50;
             document.getElementById("money-data-" + asset[index]).innerHTML = playerMoney[asset[index] - 1];
-            dataUpdate(player,moves,playerMoney,playerAsset,bankMoney,asset);
+            dataUpdate(player,moves,playerMoney,bankMoney,asset,asset_type);
             alert("You are in someone else property, you are charged with 50 rupees");
         }
 
@@ -29,7 +29,7 @@ export function propertyCharge (player,index,moves,playerMoney,playerAsset,bankM
             playerMoney[player-1] -= 150;
             playerMoney[asset[index] - 1] += 150;
             document.getElementById("money-data-" + asset[index]).innerHTML = playerMoney[asset[index] - 1];
-            dataUpdate(player,moves,playerMoney,playerAsset,bankMoney,asset);
+            dataUpdate(player,moves,playerMoney,bankMoney,asset,asset_type);
             alert("You are in someone else property, you are charged with 150 rupees");
         }
 
@@ -43,7 +43,7 @@ export function propertyCharge (player,index,moves,playerMoney,playerAsset,bankM
             playerMoney[player-1] -= 300;
             playerMoney[asset[index] - 1] += 300;
             document.getElementById("money-data-" + asset[index]).innerHTML = playerMoney[asset[index] - 1];
-            dataUpdate(player,moves,playerMoney,playerAsset,bankMoney,asset);
+            dataUpdate(player,moves,playerMoney,bankMoney,asset,asset_type);
             alert("You are in someone else property, you are charged with 300 rupees");
         }
 

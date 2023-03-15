@@ -4,8 +4,23 @@ const player_name = ["","","",""]
 const all_colours = ["Red", "Yellow", "Blue", "Green"]
 const player_colours = ["","","",""]
 
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+// const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+// const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+var body = $('body');
+body.on('mouseover', '[data-bs-toggle="tooltip"]', function (e) {
+    e.stopPropagation();
+    return new bootstrap.Tooltip(this).show();
+});
+
+body.on('mouseleave', '[data-bs-toggle="tooltip"]', function (e) {
+    $('[role="tooltip"]').fadeOut(function () {
+        e.stopPropagation();
+        $(this).remove();
+    });
+});
+
+// Instruction and player Info modal
 
 $(window).on('load', function() {
     $('.board-game').css('display','none')
@@ -118,9 +133,19 @@ $('#start_game').mouseup('mouseup', function() {
             }
         })
 
-        countOfPlayers = player_name.length
+        player_name.forEach(x => { if(x.length){ countOfPlayers += 1 } })
     }
 })
+
+// Dice
+
+let images = ["icons/dice-01.svg",
+"icons/dice-02.svg",
+"icons/dice-03.svg",
+"icons/dice-04.svg",
+"icons/dice-05.svg",
+"icons/dice-06.svg"];
+let dice = document.querySelectorAll(".dice");
 
 
 
@@ -137,7 +162,7 @@ import { findMax } from "./Dependencies/findMax.js";
 var moves = [10,10,10,10];
 var bankMoney = 5000;
 var playerMoney = [1000,1000,1000,1000];
-var playerAsset = [0,0,0,0];
+
 var turn = 1;
 
 //player positions
@@ -161,122 +186,141 @@ document.getElementById("bank-data").innerHTML = bankMoney;
 for(var i=1; i<=countOfPlayers; i++){
     document.getElementById("moves-data-" + i).innerHTML = moves[0];
     document.getElementById("money-data-" + i).innerHTML = playerMoney[0];
-    document.getElementById("asset-data-"+ i).innerHTML = playerAsset[0];
+
 }
 
 
 // roll dice button clicked
-$("#roll").click(function() {
+$("#roll-dice").click(async function() {
+
+    dice.forEach(function(die){
+        die.classList.add("shake");
+    });
+
+    var number
+
+    const rolled = function() {
+        dice.forEach(function(die){
+            die.classList.remove("shake");
+        });
+        let dieOneValue = Math.floor(Math.random()*6);
+        let dieTwoValue = Math.floor(Math.random()*6);
+        console.log(dieOneValue,dieTwoValue);
+        document.querySelector("#die-1").setAttribute("src", images[dieOneValue]);
+        document.querySelector("#die-2").setAttribute("src", images[dieTwoValue]);
+        document.querySelector("#total").innerHTML = "Your roll is " + ( (dieOneValue +1) + (dieTwoValue + 1) );
+        number = (dieOneValue +1) + (dieTwoValue + 1)
+    }
+    rolled()
+    
 
     if(turn === (parseInt(countOfPlayers) + 1)){
         turn = 1;
     }
 
     var sum = countMoves(countOfPlayers,moves);
-    console.log(sum);
     if(sum == 0){
         var winner = playerMoney.indexOf(findMax(playerMoney,countOfPlayers)) + 1;
         alert("PLAYER " + winner + " IS THE WINNER!!");
         alert("Refresh the page for a new game");
     }
+    
+    switch(turn){
+        case 1:
 
-    var number = window.prompt("Player "+ turn +", Enter any number from 1 to 12: ");
-    if(number < 1 || number > 12){
-        alert("Enter number from 1 to 12");
-    } else {
-        switch(turn){
-            case 1:
-
-                $("#" + player1pos).removeClass("player1"); 
-
-                if((parseInt(player1pos) + parseInt(number)) <= 34){
-                    player1pos = parseInt(player1pos) + parseInt(number);
-                } else {
-                    player1pos = parseInt(player1pos) + parseInt(number) - 34;
-                }
-                
-                $("#" + player1pos).addClass("player1");
-                turn += 1;
-
-                if(jail.includes(player1pos)){
-                    bankMoney = Jail(1,moves,playerMoney,playerAsset,bankMoney,asset);
-                } else if(lottery.includes(player1pos)){
-                    bankMoney = Lottery(1,moves,playerMoney,playerAsset,bankMoney,asset);
-                } else if(hotel.includes(player1pos)){
-                    bankMoney = Hotel(1,hotel.indexOf(player1pos),moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
-                } else {
-                    bankMoney = dataUpdate(1,moves,playerMoney,playerAsset,bankMoney,asset);
-                }
-
-                break;
-            case 2:
-                $("#" + player2pos).removeClass("player2"); 
-                
-                if((parseInt(player2pos) + parseInt(number)) <= 34){
-                    player2pos = parseInt(player2pos) + parseInt(number);
-                } else {
-                    player2pos = parseInt(player2pos) + parseInt(number) - 34;
-                }
-
-                $("#" + player2pos).addClass("player2");
-                turn += 1;
-
-                if(jail.includes(player2pos)){
-                    bankMoney = Jail(2,moves,playerMoney,playerAsset,bankMoney,asset);
-                } else if(lottery.includes(player2pos)){
-                    bankMoney = Lottery(2,moves,playerMoney,playerAsset,bankMoney,asset);
-                } else if(hotel.includes(player2pos)){
-                    bankMoney = Hotel(2,hotel.indexOf(player2pos),moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
-                } else {
-                    bankMoney = dataUpdate(2,moves,playerMoney,playerAsset,bankMoney,asset);
-                }
-
-                break;
-            case 3:
-                $("#" + player3pos).removeClass("player3"); 
-                
-                if((parseInt(player3pos) + parseInt(number)) <= 34){
-                    player3pos = parseInt(player3pos) + parseInt(number);
-                } else {
-                    player3pos = parseInt(player3pos) + parseInt(number) - 34;
-                }
-
-                $("#" + player3pos).addClass("player3");
-                turn += 1;
-
-                if(jail.includes(player3pos)){
-                    bankMoney = Jail(3,moves,playerMoney,playerAsset,bankMoney,asset);
-                } else if(lottery.includes(player3pos)){
-                    bankMoney = Lottery(3,moves,playerMoney,playerAsset,bankMoney,asset);
-                } else if(hotel.includes(player3pos)){
-                    bankMoney = Hotel(3,hotel.indexOf(player3pos),moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
-                } else {
-                    bankMoney = dataUpdate(3,moves,playerMoney,playerAsset,bankMoney,asset);
-                }
-
-                break;
-            case 4:
-                $("#" + player4pos).removeClass("player4"); 
-                player4pos = parseInt(player4pos) + parseInt(number);
-                $("#" + player4pos).addClass("player4");
-                turn += 1;
-
-                if(jail.includes(player4pos)){
-                    bankMoney = Jail(4,moves,playerMoney,playerAsset,bankMoney,asset);
-                } else if(lottery.includes(player4pos)){
-                    bankMoney = Lottery(4,moves,playerMoney,playerAsset,bankMoney,asset);
-                } else if(hotel.includes(player4pos)){
-                    bankMoney = Hotel(4,hotel.indexOf(player4pos),moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
-                } else {
-                    bankMoney =  dataUpdate(4,moves,playerMoney,playerAsset,bankMoney,asset);
-                }
-
-                break;
-            default:
-                alert("error occured");
             
-        }
+            $("#" + player1pos).removeClass("player1"); 
+
+            if((parseInt(player1pos) + parseInt(number)) <= 34){
+                player1pos = parseInt(player1pos) + parseInt(number);
+            } else {
+                player1pos = parseInt(player1pos) + parseInt(number) - 34;
+            }
+
+            console.log(turn, player1pos, number)
+            
+            $("#" + player1pos).addClass("player1");
+            turn += 1;
+
+            if(jail.includes(player1pos)){
+                bankMoney = Jail(1,moves,playerMoney,bankMoney,asset);
+            } else if(lottery.includes(player1pos)){
+                bankMoney = Lottery(1,moves,playerMoney,bankMoney,asset);
+            } else if(hotel.includes(player1pos)){
+                bankMoney = Hotel(1,hotel.indexOf(player1pos),moves,playerMoney,bankMoney,asset,asset_type);
+            } else {
+                bankMoney = dataUpdate(1,moves,playerMoney,bankMoney,asset,asset_type);
+            }
+
+            break;
+        case 2:
+            $("#" + player2pos).removeClass("player2"); 
+            
+            if((parseInt(player2pos) + parseInt(number)) <= 34){
+                player2pos = parseInt(player2pos) + parseInt(number);
+            } else {
+                player2pos = parseInt(player2pos) + parseInt(number) - 34;
+            }
+
+            $("#" + player2pos).addClass("player2");
+            turn += 1;
+
+            if(jail.includes(player2pos)){
+                bankMoney = Jail(2,moves,playerMoney,bankMoney,asset);
+            } else if(lottery.includes(player2pos)){
+                bankMoney = Lottery(2,moves,playerMoney,bankMoney,asset);
+            } else if(hotel.includes(player2pos)){
+                bankMoney = Hotel(2,hotel.indexOf(player2pos),moves,playerMoney,bankMoney,asset,asset_type);
+            } else {
+                bankMoney = dataUpdate(2,moves,playerMoney,bankMoney,asset,asset_type);
+            }
+
+            break;
+        case 3:
+            $("#" + player3pos).removeClass("player3"); 
+            
+            if((parseInt(player3pos) + parseInt(number)) <= 34){
+                player3pos = parseInt(player3pos) + parseInt(number);
+            } else {
+                player3pos = parseInt(player3pos) + parseInt(number) - 34;
+            }
+
+            $("#" + player3pos).addClass("player3");
+            turn += 1;
+
+            if(jail.includes(player3pos)){
+                bankMoney = Jail(3,moves,playerMoney,bankMoney,asset);
+            } else if(lottery.includes(player3pos)){
+                bankMoney = Lottery(3,moves,playerMoney,bankMoney,asset);
+            } else if(hotel.includes(player3pos)){
+                bankMoney = Hotel(3,hotel.indexOf(player3pos),moves,playerMoney,bankMoney,asset,asset_type);
+            } else {
+                bankMoney = dataUpdate(3,moves,playerMoney,bankMoney,asset,asset_type);
+            }
+
+            break;
+        case 4:
+            $("#" + player4pos).removeClass("player4"); 
+            player4pos = parseInt(player4pos) + parseInt(number);
+            $("#" + player4pos).addClass("player4");
+            turn += 1;
+
+            if(jail.includes(player4pos)){
+                bankMoney = Jail(4,moves,playerMoney,bankMoney,asset);
+            } else if(lottery.includes(player4pos)){
+                bankMoney = Lottery(4,moves,playerMoney,bankMoney,asset);
+            } else if(hotel.includes(player4pos)){
+                bankMoney = Hotel(4,hotel.indexOf(player4pos),moves,playerMoney,bankMoney,asset,asset_type);
+            } else {
+                bankMoney =  dataUpdate(4,moves,playerMoney,bankMoney,asset,asset_type);
+            }
+
+            break;
+        default:
+            alert("error occured");
+        
     }
+
 
 });
 
