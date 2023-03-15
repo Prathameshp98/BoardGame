@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Board Game</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="modal.css">
+    <link rel="stylesheet" href="card.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
     <!-- CSS only -->
@@ -31,7 +31,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-7" id="exampleModalLabel" style="font-size: 28px">Welcome to <span style="font-weight: 800;">The Business</span></h1>
-                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                 </div>
                 <div class="modal-body">
                     <p>Please carefully go through the Game instruction</p>
@@ -57,7 +56,6 @@
                     </ul>
                 </div>
                 <div class="modal-footer d-flex justify-content-end">
-                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Decline</button> -->
                     <button type="button" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Proceed</button>
                 </div>
             </div>
@@ -69,7 +67,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Player Information</h1>
-                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                 </div>
                 <div class="modal-body" id="player">
                     <div id="player-info">
@@ -121,8 +118,61 @@
     </div>
 
     <div class="row board-game">
-        <div class="col-3">
-            <div id="p1" class="player-info">
+        <div class="cards">
+            
+            <div id="p1" class="card-container">
+                <img class="player-img img1" src="/icons/red_card.png" alt="" />
+                <div class="name-container">
+                    <h2 class="p1">Prathamesh</h2>
+                </div>
+                <div class="player-stats">
+                    <div class="player-stats-upper">
+                        <div class="player-stats-upper-left">
+                            <img src="/icons/dice.png" alt="" />
+                            <p id="moves-data-1">NA</p>
+                        </div>
+                        <div class="player-stats-upper-right">
+                            <img src="/icons/money.png" alt="" />
+                            <p id="money-data-1">NA</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="player-stats-lower">
+                        <img src="icons/hotel.png" height="30px" width="30px" style="background-color: red;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tier-III (Rent: 200)"></td>
+                        <img src="icons/hotel.png" height="30px" width="30px" style="background-color: yellow;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tier-III (Rent: 200)"></td>
+                        <img src="icons/hotel.png" height="30px" width="30px" style="background-color: blue;"></td>
+                        <img src="icons/hotel.png" height="30px" width="30px" style="background-color: green;"></td>
+                    </div>
+                </div>
+            </div>
+
+            <div id="p3" class="card-container">
+                <img class="player-img img3" src="/icons/red_card.png" alt="" />
+                <div class="name-container">
+                    <h2 class="p3">Prathamesh</h2>
+                </div>
+                <div class="player-stats">
+                    <div class="player-stats-upper">
+                        <div class="player-stats-upper-left">
+                            <img src="/icons/dice.png" alt="" />
+                            <p id="moves-data-1">NA</p>
+                        </div>
+                        <div class="player-stats-upper-right">
+                            <img src="/icons/money.png" alt="" />
+                            <p id="money-data-1">NA</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="player-stats-lower">
+                        <img src="icons/hotel.png" height="30px" width="30px" style="background-color: red;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tier-III (Rent: 200)"></td>
+                        <img src="icons/hotel.png" height="30px" width="30px" style="background-color: yellow;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tier-III (Rent: 200)"></td>
+                        <img src="icons/hotel.png" height="30px" width="30px" style="background-color: blue;"></td>
+                        <img src="icons/hotel.png" height="30px" width="30px" style="background-color: green;"></td>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div id="p1" class="player-info">
                 <h1 class="p1">Player 1</h1>
                 <div class="inline-style">
                     <p>Moves Left: &nbsp;</p>
@@ -140,8 +190,8 @@
                     <p>Hotels Owned: &nbsp;</p>
                     <p id="hotel-data-1">NA</p>
                 </div>
-            </div>
-            <div id="p3" class="player-info">
+            </div> -->
+            <!-- <div id="p3" class="player-info">
                 <h1 class="p3">Player 3</h1>
                 <div class="inline-style">
                     <p>Moves Left: &nbsp;</p>
@@ -159,13 +209,13 @@
                     <p>Hotels Owned: &nbsp;</p>
                     <p id="hotel-data-3">NA</p>
                 </div>
-            </div>
+            </div> -->
         </div>
 
-        <div class="col-6">
+        <div class="board">
             <table class="center">
                 <tr>
-                    <td id="1"><img src="icons/start.png" height="30px" width="30px"></td>
+                    <td id="1"><img src="icons/start.png" height="30px" width="30px" class="corner-cells"></td>
                     <td id="2">2</td>
                     <td id="3">3</td>
                     <td id="4">4</td>
@@ -173,7 +223,7 @@
                     <td id="6">6</td>
                     <td id="7"><img src="icons/lottery.png" height="30px" width="30px"></td>
                     <td id="8" class=""><img src="icons/hotel.png" height="30px" width="30px" style="background-color: yellow;"></td>
-                    <td id="9">9</td>
+                    <td id="9" class="corner-cells">9</td>
                 </tr>
                 <tr>
                     <td id="34"><img src="icons/lottery.png" height="30px" width="30px"></td>
@@ -267,7 +317,7 @@
                     <td id="17">17</td>
                 </tr>
                 <tr>
-                    <td id="26">26</td>
+                    <td id="26" class="corner-cells">26</td>
                     <td id="25">25</td>
                     <td id="24"><img src="icons/lottery.png" height="30px" width="30px"></td>
                     <td id="23">23</td>
@@ -275,13 +325,67 @@
                     <td id="21">21</td>
                     <td id="20"><img src="icons/jail.png" height="30px" width="30px"></td>
                     <td id="19">19</td>
-                    <td id="18"><img src="icons/hotel.png" height="30px" width="30px" style="background-color: red;"></td>
+                    <td id="18" class="corner-cells"><img src="icons/hotel.png" height="30px" width="30px" style="background-color: red;"></td>
                 </tr>
             </table>
         </div>
 
-        <div class="col-3">
-            <div id="p2" class="player-info">
+        <div class="cards">
+
+            <div id="p2" class="card-container">
+                <img class="player-img img2" src="/icons/red_card.png" alt="" />
+                <div class="name-container">
+                    <h2 class="p2">Prathamesh</h2>
+                </div>
+                <div class="player-stats">
+                    <div class="player-stats-upper">
+                        <div class="player-stats-upper-left">
+                            <img src="/icons/dice.png" alt="" />
+                            <p id="moves-data-1">NA</p>
+                        </div>
+                        <div class="player-stats-upper-right">
+                            <img src="/icons/money.png" alt="" />
+                            <p id="money-data-1">NA</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="player-stats-lower">
+                        <img src="icons/hotel.png" height="30px" width="30px" style="background-color: red;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tier-III (Rent: 200)"></td>
+                        <img src="icons/hotel.png" height="30px" width="30px" style="background-color: yellow;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tier-III (Rent: 200)"></td>
+                        <img src="icons/hotel.png" height="30px" width="30px" style="background-color: blue;"></td>
+                        <img src="icons/hotel.png" height="30px" width="30px" style="background-color: green;"></td>
+                    </div>
+                </div>
+            </div>
+
+            <div id="p4" class="card-container">
+                <img class="player-img img4" src="/icons/red_card.png" alt="" />
+                <div class="name-container">
+                    <h2 class="p4">Prathamesh</h2>
+                </div>
+                <div class="player-stats">
+                    <div class="player-stats-upper">
+                        <div class="player-stats-upper-left">
+                            <img src="/icons/dice.png" alt="" />
+                            <p id="moves-data-1">NA</p>
+                        </div>
+                        <div class="player-stats-upper-right">
+                            <img src="/icons/money.png" alt="" />
+                            <p id="money-data-1">NA</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="player-stats-lower">
+                        <img src="icons/hotel.png" height="30px" width="30px" style="background-color: red;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tier-III (Rent: 200)"></td>
+                        <img src="icons/hotel.png" height="30px" width="30px" style="background-color: yellow;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tier-III (Rent: 200)"></td>
+                        <img src="icons/hotel.png" height="30px" width="30px" style="background-color: blue;"></td>
+                        <img src="icons/hotel.png" height="30px" width="30px" style="background-color: green;"></td>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- <div id="p2" class="player-info">
                 <h1 class="p2">Player 2</h1>
                 <div class="inline-style">
                     <p>Moves Left: &nbsp;</p>
@@ -318,11 +422,13 @@
                     <p>Hotels Owned: &nbsp;</p>
                     <p id="hotel-data-4">NA</p>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="button-div">
-                <button type="button" class="btn btn-lg btn-warning" id="roll" style="position: fixed; bottom: 30px; right: 30px;">Roll Dice</button>
-            </div>
+            
+        </div>
+
+        <div class="button-div">
+            <button type="button" class="btn btn-lg btn-warning" id="roll" style="position: absolute; display: flex; top: 30px; left: 47%;">Roll Dice</button>
         </div>
     </div> 
 

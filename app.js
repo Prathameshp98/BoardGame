@@ -4,17 +4,15 @@ const player_name = ["","","",""]
 const all_colours = ["Red", "Yellow", "Blue", "Green"]
 const player_colours = ["","","",""]
 
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
 $(window).on('load', function() {
     $('.board-game').css('display','none')
     $('#exampleModal').modal('show');
 });
 
-
 $('body').on('click', 'select.form-select', function() {
-
-
-    console.log("player colour: ",player_colours)
-    console.log(this.value, player_colours[this.id.charAt(this.id.length-1) - 1])
 
     // $('#' + this.id).html(`<option  id="colour-option" selected value="">Select your Colour</option>`)
     // $('#' + this.id)[0].childElementCount < 2 || this.value.length
@@ -109,11 +107,12 @@ $('#start_game').mouseup('mouseup', function() {
         $('#exampleModalToggle2').modal('hide')
         $('.board-game').css('display','flex')
 
+        console.log(player_colours)
         player_name.forEach((x,index) => {
             console.log(x, index)
             if(x.length){
                 $('.p' + (index+1)).html(x)
-                $('.p' + (index+1)).css('color',player_colours[index])
+                $('.img' + (index+1)).attr("src","/icons/" + player_colours[index] + ".png")
             } else {
                 $('#p' + (index+1)).css('display','none')
             }
