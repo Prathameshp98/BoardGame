@@ -35,15 +35,12 @@ $('body').on('click', 'select.form-select', function() {
     if(this.value === player_colours[this.id.charAt(this.id.length-1) - 1]){
         $('#' + this.id).html(``)
         var diff = all_colours.filter(x => player_colours.indexOf(x) === -1)
-        console.log("diffs: ", diff)
         var available = '<option value="'+ player_colours[this.id.charAt(this.id.length-1) - 1] +'">' + player_colours[this.id.charAt(this.id.length-1) - 1] + '</option>'
         diff.forEach(x => {
             available += '<option>' + x + '</option>'
         })
         $('#' + this.id).append(`${available}`)
-    } else {
-        console.log("skipped")
-    }
+    } 
 
     const player_num = $('#player-info')[0].childElementCount
     for(var i=1; i<=player_num; i++){
@@ -122,9 +119,7 @@ $('#start_game').mouseup('mouseup', function() {
         $('#exampleModalToggle2').modal('hide')
         $('.board-game').css('display','flex')
 
-        console.log(player_colours)
         player_name.forEach((x,index) => {
-            console.log(x, index)
             if(x.length){
                 $('.p' + (index+1)).html(x)
                 $('.img' + (index+1)).attr("src","/icons/" + player_colours[index] + ".png")
@@ -205,7 +200,6 @@ $("#roll-dice").click(async function() {
         });
         let dieOneValue = Math.floor(Math.random()*6);
         let dieTwoValue = Math.floor(Math.random()*6);
-        console.log(dieOneValue,dieTwoValue);
         document.querySelector("#die-1").setAttribute("src", images[dieOneValue]);
         document.querySelector("#die-2").setAttribute("src", images[dieTwoValue]);
         document.querySelector("#total").innerHTML = "Your roll is " + ( (dieOneValue +1) + (dieTwoValue + 1) );
@@ -222,13 +216,12 @@ $("#roll-dice").click(async function() {
     if(sum == 0){
         var winner = playerMoney.indexOf(findMax(playerMoney,countOfPlayers)) + 1;
         alert("PLAYER " + winner + " IS THE WINNER!!");
-        alert("Refresh the page for a new game");
+        location.reload(true)
     }
     
     switch(turn){
         case 1:
-
-            
+    
             $("#" + player1pos).removeClass("player1"); 
 
             if((parseInt(player1pos) + parseInt(number)) <= 34){
@@ -237,8 +230,6 @@ $("#roll-dice").click(async function() {
                 player1pos = parseInt(player1pos) + parseInt(number) - 34;
             }
 
-            console.log(turn, player1pos, number)
-            
             $("#" + player1pos).addClass("player1");
             turn += 1;
 
