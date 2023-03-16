@@ -216,6 +216,7 @@ $("#roll-dice").click(async function() {
     if(sum == 0){
         var winner = playerMoney.indexOf(findMax(playerMoney,countOfPlayers)) + 1;
         alert("PLAYER " + winner + " IS THE WINNER!!");
+        setTimeout(3000)
         location.reload(true)
     }
     
