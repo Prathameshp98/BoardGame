@@ -1,0 +1,50 @@
+
+.container-dice {
+    width: 200px;
+    padding: 50px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 90%;
+    left: 51%;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Poppins",sans-serif;
+}
+.dice-wrapper{
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.dice {
+    margin: 0 20px;
+    width: 50px;
+}
+
+button{
+    background-color: #e92e3d;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    padding: 10px 0;
+    width: 150px;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.shake{
+    animation: shake 0.5s infinite;
+}
+@keyframes shake{
+    0%{
+        transform: rotate(8deg);
+    }
+    50%{
+        transform: rotate(-8deg);
+    }
+    100%{
+        transform: rotate(8deg);
+    }
+}

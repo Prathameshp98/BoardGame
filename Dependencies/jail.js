@@ -1,7 +1,7 @@
 import { dataUpdate } from "./dataUpdate.js";
 
 
-export function Jail(player,moves,playerMoney,playerAsset,bankMoney,asset) {
+export function Jail(player,moves,playerMoney,bankMoney,asset) {
 
     if(playerMoney[player-1] - 150 < 0){
         alert("Insufficient funds");
@@ -11,7 +11,7 @@ export function Jail(player,moves,playerMoney,playerAsset,bankMoney,asset) {
         playerMoney[player-1] -= 150;
         bankMoney += 150;
         alert("Opps, You are fined with 150 Rupees.");
-        dataUpdate(player,moves,playerMoney,playerAsset,bankMoney,asset);
+        dataUpdate(player,moves,playerMoney,bankMoney,asset);
     }
     
     return bankMoney;

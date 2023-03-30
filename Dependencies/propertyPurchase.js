@@ -1,7 +1,7 @@
 import { dataUpdate } from "./dataUpdate.js";
 
 
-export function propertyPurchase(player,index,moves,playerMoney,playerAsset,bankMoney,asset,asset_type) {
+export function propertyPurchase(player,index,moves,playerMoney,bankMoney,asset,asset_type) {
 
     var choice = window.prompt("Welcome to the hotel, do you wish to purchase? (Press Y for yes and N for no)");
     if(choice === "Y" || choice === "y"){
@@ -12,10 +12,10 @@ export function propertyPurchase(player,index,moves,playerMoney,playerAsset,bank
                 playerMoney[player-1] -= 200;
                 bankMoney += 200
                 alert("Congrats, you have purchased the hotel with Silver Type");
-                playerAsset[player-1] += 200;
+
                 asset[index] = player;
                 asset_type[index] = 1;
-                dataUpdate(player,moves,playerMoney,playerAsset,bankMoney,asset);
+                dataUpdate(player,moves,playerMoney,bankMoney,asset,asset_type);
 
             } else {
                 alert("Insufficient funds, may be another time");
@@ -29,10 +29,10 @@ export function propertyPurchase(player,index,moves,playerMoney,playerAsset,bank
                 playerMoney[player-1] -= 300;
                 bankMoney += 300
                 alert("Congrats, you have purchased the hotel with Gold Type");
-                playerAsset[player-1] += 300;
+
                 asset[index] = player;
                 asset_type[index] = 2;
-                dataUpdate(player,moves,playerMoney,playerAsset,bankMoney,asset);
+                dataUpdate(player,moves,playerMoney,bankMoney,asset,asset_type);
 
             } else {
                 alert("Insufficient funds, may be another time");
@@ -46,10 +46,9 @@ export function propertyPurchase(player,index,moves,playerMoney,playerAsset,bank
                 playerMoney[player-1] -= 500;
                 bankMoney += 500
                 alert("Congrats, you have purchased the hotel with Platinum Type");
-                playerAsset[player-1] += 500;
                 asset[index] = player;
                 asset_type[index] = 3;
-                dataUpdate(player,moves,playerMoney,playerAsset,bankMoney,asset);
+                dataUpdate(player,moves,playerMoney,bankMoney,asset,asset_type);
 
             } else {
                 alert("Insufficient funds, may be another time");
@@ -59,7 +58,7 @@ export function propertyPurchase(player,index,moves,playerMoney,playerAsset,bank
 
         } else {
             alert("Invalid Input");
-            propertyPurchase(player,index,moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
+            propertyPurchase(player,index,moves,playerMoney,bankMoney,asset,asset_type);
         }
 
     } else if(choice === "N" || choice === "n") {
@@ -69,7 +68,7 @@ export function propertyPurchase(player,index,moves,playerMoney,playerAsset,bank
 
     } else {
         alert("Invalid Input");
-        propertyPurchase(player,index,moves,playerMoney,playerAsset,bankMoney,asset,asset_type);
+        propertyPurchase(player,index,moves,playerMoney,bankMoney,asset,asset_type);
     }
 
     return bankMoney;
