@@ -24,7 +24,13 @@ body.on('mouseleave', '[data-bs-toggle="tooltip"]', function (e) {
 
 $(window).on('load', function() {
     $('.board-game').css('display','none')
-    $('#exampleModal').modal('show');
+    if ($(window).width() < 1150) {
+        console.log("wtf")
+        $('#exampleModal0').modal('show');
+    } else {
+        $('#exampleModal').modal('show');
+    }
+    
 });
 
 $('body').on('click', 'select.form-select', function() {
@@ -174,6 +180,12 @@ var hotel = [8,13,18,28];
 //assets owned
 var asset = [0,0,0,0]; //player number who owns the asset, if zero that means asset is not owned.
 var asset_type = [0,0,0,0]; //type of asset owned by certain player, if zero that means asset is not owned.
+asset_type = {
+    '1': [0,0,0,0],
+    '2': [0,0,0,0],
+    '3': [0,0,0,0],
+    '4': [0,0,0,0]
+}
 
 
 document.getElementById("bank-data").innerHTML = bankMoney;
