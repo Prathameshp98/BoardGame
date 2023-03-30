@@ -5,11 +5,12 @@ body {
 
 /* gameBoard styles */
 .board-game {
-    display: flex;
+    display: none;
     flex-direction: column;
     flex-wrap: nowrap;
     height: 100vh;
 }
+
 
 .board-game .cards {
     width: fit-content;

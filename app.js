@@ -1,3 +1,4 @@
+$('.board-game').css('display','none')
 
 let countOfPlayers = 0
 const player_name = ["","","",""]
@@ -23,7 +24,6 @@ body.on('mouseleave', '[data-bs-toggle="tooltip"]', function (e) {
 // Instruction and player Info modal
 
 $(window).on('load', function() {
-    $('.board-game').css('display','none')
     if ($(window).width() < 1150) {
         console.log("wtf")
         $('#exampleModal0').modal('show');
